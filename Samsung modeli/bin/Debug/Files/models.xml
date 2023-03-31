@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<ArrayOfModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Model>
+    <Name>Galaxy S23</Name>
+    <ProductionStartYear>2023</ProductionStartYear>
+    <AddDate>31.03.2023.</AddDate>
+    <ImagePath>Images/Galaxy S23.jpg</ImagePath>
+    <RtfPath>Files/Galaxy S23.rtf</RtfPath>
+  </Model>
+  <Model>
+    <Name>Galaxy S22</Name>
+    <ProductionStartYear>2022</ProductionStartYear>
+    <AddDate>31.03.2023.</AddDate>
+    <ImagePath>Images/Galaxy S22.jpg</ImagePath>
+    <RtfPath>Files/Galaxy S22.rtf</RtfPath>
+  </Model>
+  <Model>
+    <Name>Galaxy S21</Name>
+    <ProductionStartYear>2021</ProductionStartYear>
+    <AddDate>31.03.2023.</AddDate>
+    <ImagePath>Images/Galaxy S21.jpg</ImagePath>
+    <RtfPath>Files/Galaxy S21.rtf</RtfPath>
+  </Model>
+  <Model>
+    <Name>Galaxy S10</Name>
+    <ProductionStartYear>2019</ProductionStartYear>
+    <AddDate>31.03.2023.</AddDate>
+    <ImagePath>Images/Galaxy S10.jpg</ImagePath>
+    <RtfPath>Files/Galaxy S10.rtf</RtfPath>
+  </Model>
+  <Model>
+    <Name>Galaxy A03</Name>
+    <ProductionStartYear>2021</ProductionStartYear>
+    <AddDate>31.03.2023.</AddDate>
+    <ImagePath>Images/Galaxy A03.jpg</ImagePath>
+    <RtfPath>Files/Galaxy A03.rtf</RtfPath>
+  </Model>
+  <Model>
+    <Name>Galaxy Z Fold 4</Name>
+    <ProductionStartYear>2022</ProductionStartYear>
+    <AddDate>31.03.2023.</AddDate>
+    <ImagePath>Images/Galaxy Z Fold 4.jpg</ImagePath>
+    <RtfPath>Files/Galaxy Z Fold 4.rtf</RtfPath>
+  </Model>
+</ArrayOfModel>

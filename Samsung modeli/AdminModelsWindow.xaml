@@ -1,0 +1,111 @@
+﻿<Window x:Class="Samsung_modeli.AdminModelsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Samsung_modeli"
+        mc:Ignorable="d"
+        Title="Samsung models" Height="650" Width="1100" Closing="Window_Closing"   WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
+    
+    <Grid Background="#8aa6ff">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <DataGrid Name="dgModels" Grid.Column="0" ItemsSource="{Binding Models, UpdateSourceTrigger=PropertyChanged}"   AutoGenerateColumns="False" RowBackground="#FFB4C0FF" Foreground="DarkBlue" FontSize="30" FontWeight="Bold" HorizontalGridLinesBrush="DarkBlue" VerticalGridLinesBrush="DarkBlue" Background="#8aa6ff" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" ScrollViewer.CanContentScroll="False">
+            <DataGrid.Resources>
+                <ResourceDictionary>
+                    <Style x:Key="{x:Type DataGridCell}" TargetType="{x:Type DataGridCell}">
+                        <!-- ovo iskljuci bojenje u plavo kad se selektuje celija -->
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="BorderBrush" Value="Transparent" />
+                                <Setter Property="Foreground" Value="DarkBlue"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                    <Style x:Key="{x:Type DataGridRow}" TargetType="{x:Type DataGridRow}">
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="BorderBrush" Value="Transparent" />
+                                <Setter Property="Foreground" Value="DarkBlue"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ResourceDictionary>
+            </DataGrid.Resources>
+            
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Width="50">
+                    <!-- ovo koristim umjesto DataGridCheckBoxColumn zato sto u tom njihovom moras prvo da kliknes na tu celiju, tj. da je selektujes, pa onda na checkbox ili dva puta na checkbox -->
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox  IsChecked="{Binding Path=IsSelected, UpdateSourceTrigger=PropertyChanged}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <!-- IsChecked se upali kada ta celija bude selektovana, tj. kada prvi put kliknes, ne samo da ce selektovati celiju nego ce odmah i da checkira checkbox -->
+                                <CheckBox.LayoutTransform>
+                                    <!-- ovo uvecava checkbox -->
+                                    <ScaleTransform ScaleX="2" ScaleY="2" />
+                                </CheckBox.LayoutTransform>
+                            </CheckBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridHyperlinkColumn x:Name="hyperlinkColumn" Header="Model name" Width="2*" ContentBinding="{Binding Name}"  IsReadOnly="True">
+                    <DataGridHyperlinkColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <EventSetter Event="Hyperlink.Click" Handler="hyperlinkName_Click"/>
+                        </Style>
+                    </DataGridHyperlinkColumn.ElementStyle>
+                    <DataGridHyperlinkColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                    </DataGridHyperlinkColumn.HeaderStyle>
+                </DataGridHyperlinkColumn>
+
+                    <DataGridTemplateColumn Header="Image"   IsReadOnly="True" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding ImagePath}" Stretch="UniformToFill" Margin="30 30 30 30"  RenderOptions.BitmapScalingMode="Fant"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTemplateColumn.HeaderStyle>
+                </DataGridTemplateColumn >
+
+                <DataGridTextColumn Header="Add date" Binding="{Binding AddDate}" Width="*" IsReadOnly="True" > 
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel  Grid.Column="1" Orientation="Vertical" Margin="0 50 0 0">
+            <Image Source="Images/logo2.jpg" Width="180" RenderOptions.BitmapScalingMode="Fant"/>
+            <Button Content="Add" Name="buttonAdd"  Width="120" Height="50" Foreground="DarkBlue" FontWeight="Bold" Background="#FFB4C0FF" FontSize="20" Click="buttonAdd_Click"  BorderBrush="DarkBlue" BorderThickness="2" Margin="0 50 0 0"  />
+            <Button Content="Delete" Name="buttonDelete"  Width="120" Height="50" Foreground="DarkBlue" FontWeight="Bold" Background="#FFB4C0FF" FontSize="20" Click="buttonDelete_Click"  BorderBrush="DarkBlue" BorderThickness="2" Margin="0 30 0 0" />
+            <Button Content="Exit" Name="buttonExit" Width="120" Height="50" Foreground="DarkBlue" FontWeight="Bold" Background="#FFB4C0FF" FontSize="20" Click="buttonExit_Click" BorderBrush="DarkBlue" BorderThickness="2" Margin="0 30 0 0" />
+        </StackPanel>
+        
+    </Grid>
+</Window>
